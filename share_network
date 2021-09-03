@@ -1,0 +1,26 @@
+This file describes how to share a internet network with a linux server.
+
+First your linux server must be connected to the internet via ethernet or wi-fi, so you must setup this network.
+
+Next you need to assign a ip to the other interface:
+sudo ifconfig enp3s0 192.168.2.1 netmask 255.255.255.0
+
+Then you have to route the network:
+sudo ip route add 192.168.2.0/24 dev enp3s0
+
+You must access the file /etc/sysctl.conf and enable ipv4 forwarding.
+
+Now you have to configure the iptables:
+Flush then first:
+sudo iptables --flush
+sudo iptables --table nat --flush
+sudo iptables --delete-chain
+sudo iptables --table nat --delete-chain
+Now set iptables up:
+sudo iptables --table nat --append POSTROUTING --out-interface wlp2s0 -j MASQUERADE
+sudo iptables --append FORWARD --in-interface enp3s0 -j ACCEPT
+
+At last restart the network:
+sudo /etc/init.d/networking restart
+
+The client must be set manually, because this setup does not use dhcp to generate ips automatically to the clients.

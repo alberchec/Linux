@@ -1,0 +1,26 @@
+How to configure a dhcp server in linux:
+
+First dhcp server must be installed:
+sudo apt install isc-dhcp-server
+
+Then configure which interfaces are going to use it:
+Go to /etc/default/isc-dhcp-server and add the name of the interface (enp3s0).
+
+Now configure dhcp server parameters:
+Go to /etc/dhcp/dhcp.conf
+Set option domain-name, option domain-name-servers, set authoritative ON.
+Define sub-network:
+subnet 192.168.2.0 netmask 255.255.255.0 {
+	option routers 192.168.2.1;
+	option subnet-mask 255.255.255.0;
+	option domain-name-server 192.168.15.1;
+	range 192.168.2.2 192.168.2.254;
+}
+
+Now start and enable dhcp server:
+sudo systemctl start isc-dhcp-server
+sudo systemctl enable isc-dhcp-server
+
+Allow requests to DHCP on firewall, which listen on port 67/UDP
+sudo ufw allow 67/udp
+sudo ufw reload
