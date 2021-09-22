@@ -1,0 +1,28 @@
+Format corrupted disk with Linux
+
+Enter gdisk and delete existing partitions
+	sudo gdisk /dev/sdc (sdc name of device)
+
+Next create new empty GPT partition table inside gdisk
+	option o
+
+Create new partition
+	option n
+
+Verify partitions
+	option p
+
+Write changes to device then quit
+	option w, then q
+
+Write the new exFAT filesystem
+	sudo mkfs.exfat -n my_label /dev/sdc
+
+Convert the boot recor to GPT
+	sudo gdisk /dev/sdc
+	option w
+
+Set the msftdata on the exFAT partition
+	sudo parted /dev/sdc
+	set 1 msftdata on
+	q
