@@ -12,6 +12,7 @@ do
 		pgrep -f transmission-cli | xargs kill
 		rm /home/janci/.config/transmission/torrents/*
 		rm /home/janci/.config/transmission/resume/*
+		rm /home/janci/Downloads/logTorr
 		break
 	else
 		cat /home/janci/Downloads/logTorr | grep Progress | tail -1
