@@ -51,7 +51,7 @@ int main(){
 	for(int i=0;i<servers.size();i++){
 		cout << "Pinging " << servers[i].location << " server...";
 		string cmd = "ping -c 1 " + servers[i].name + ".privacy.network | grep \"64 bytes\" > /home/janci/alberto/Linux/vpn_servers_ping/" + servers[i].location + ".txt";
-		int a = system(cmd.c_str() );
+		system(cmd.c_str() );
 		cout << "\b\b\b" << " OK\n";
 	}
 
