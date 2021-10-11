@@ -2,17 +2,22 @@
 #include <fstream>
 #include <stdlib.h>
 #include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 struct Server{
 	string location;
 	string name;
 	float ping_time;
+	bool operator < (Server& s){
+		if(ping_time >= s.ping_time) return true;
+		else 			     return false;
+	}
 };
 
 int main(){
-	system("ls /etc/openvpn/client > servers-names.txt");
-	ifstream input("servers-names.txt");
+	//system("ls /etc/openvpn/client > servers-names.txt");
+	ifstream input("servers-names");
 	string server;
 	vector<string> server_file;
 	vector<Server> servers;
@@ -41,16 +46,34 @@ int main(){
 		}
 		input.close();
 	}
-	system("rm servers-names.txt");
+
+	cout << "\n";
 
 	for(int i=0;i<servers.size();i++){
-		cout << "pinging " + servers[i].location + " server...";
-		string cmd = "ping -c 1 " + servers[i].name + ".privacy.network &";
+		cout << "Pinging " << servers[i].location << " server...";
+		string cmd = "ping -c 1 " + servers[i].name + ".privacy.network | grep \"64 bytes\" > " + servers[i].location + ".txt";
 		int a = system(cmd.c_str() );
-		cout << "\r";
+		cout << "\b\b\b" << " OK\n";
 	}
 
 	for(int i=0;i<servers.size();i++){
-		cout << servers[i].location << ' ' << servers[i].ping_time << endl;
+		input.open(servers[i].location + ".txt");
+		getline(input,server);
+		int pos = server.find("time=");
+		server = server.substr(pos + 5);
+		pos = server.find(" ms");
+		server = server.substr(0,pos);
+		servers[i].ping_time = stof(server);
+		input.close();
 	}
+	sort(servers.begin(),servers.end());
+	cout << "\n\n";
+
+	for(int i=0; i<servers.size(); i++){
+		cout.width(20);
+		cout << left << servers[i].location << servers[i].ping_time << " ms" << endl;
+	}
+	cout << "\n";
+
+	system("rm *.txt");
 }
