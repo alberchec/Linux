@@ -1,0 +1,1 @@
+rsync -rbt --backup-dir=/Volumes/LaCie/BackUpMac/Deleted/Desktop$(date +%Y-%m-%d)/ --delete --progress /Users/alberto/Desktop/ /Volumes/LaCie/BackUpMac/Desktop && rsync -rbt --backup-dir=/Volumes/LaCie/BackUpMac/Deleted/Documents$(date +%Y-%m-%d)/ --delete --progress /Users/alberto/Documents/ /Volumes/LaCie/BackUpMac/Documents
