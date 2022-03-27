@@ -1,0 +1,22 @@
+Connect to Wi-Fi via wpa_supplicant.
+To connect to a wpa2 protected wi-fi is necessary to use this program.
+
+First we need to create the file /etc/wpa_supplicant.conf
+We can do that by using the command:
+wpa_passphrase your-ESSID your-passphrase | sudo tee /etc/wpa_supplicant.conf
+
+If the Wi-Fi doesn't broadcast its SSID, it's necessary to add the following line to the wpa_supplicant.conf file:
+scan_ssid=1 (below psk)
+
+To connect to the access point type the command:
+sudo wpa_supplicant -B -c /etc/wpa_supplicant.conf -i interface
+
+Next it's needed to receive an ip address from the DHCP server:
+sudo dhclient interface
+
+To disconnect:
+sudo dhclient interface -r (releases the ip address)
+Then:
+ps aux | grep wpa_supplicant
+This will give you the process a process number and then:
+sudo kill process_number
