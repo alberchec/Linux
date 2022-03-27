@@ -120,16 +120,19 @@ fi
 # ---------------------------------------------------------------------
 # MY OWN BASH COMMANDS
 
-pia-vpn(){
-  sudo openvpn --config /etc/openvpn/vpn.conf --daemon
+vpn(){
+  sudo openvpn --config /etc/openvpn/vpn2.ovpn --daemon
   sleep 2
 
   if ip address | grep -q "tun0"
   then
-    echo "Connected to PIA VPN"
+    echo "Connected to SURFSHARK VPN"
     sudo rm -f /etc/resolv.conf
-    sudo ln -s /run/resolvconf/resolv.conf /etc/resolv.conf
-    echo "DNS server $(cat /etc/resolv.conf | grep '10.')"
+    #sudo ln -s /run/resolvconf/resolv.conf /etc/resolv.conf
+    sudo cp /etc/resolv2.conf /etc/resolv.conf
+    echo "$(cat /etc/resolv.conf | grep 'nameserver')"
+    echo $'\n'
+    echo "$(cat /run/resolvconf/resolv.conf | grep 'nameserver')"
     sudo ufw enable
     echo "Running DNS leak test"
     sleep 2
@@ -144,7 +147,7 @@ kill-vpn(){
   sudo killall openvpn
   sudo rm -f /etc/resolv.conf
   sudo cp /etc/resolv.conf.orig /etc/resolv.conf
-  echo "DNS server $(cat /etc/resolv.conf)"
+  echo "$(cat /etc/resolv.conf)"
   echo " "
   sleep 2
   ps aux | grep openvpn
