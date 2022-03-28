@@ -160,3 +160,7 @@ torr(){
 vpn-ping(){
   /home/janci/alberto/Linux/vpn_servers_ping/servers-ping.out
 }
+
+gs(){
+  git status
+}
