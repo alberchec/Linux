@@ -134,8 +134,9 @@ vpn(){
     echo $'\n'
     echo "$(cat /run/resolvconf/resolv.conf | grep 'nameserver')"
     sudo ufw enable
+    sudo ip route del default via 192.168.15.1 dev enp3s0 onlink
     echo "Running DNS leak test"
-    sleep 2
+    sleep 5
     ~/alberto/Linux/dnsleaktest.sh
   else
     echo "Connection failed"
@@ -149,8 +150,9 @@ kill-vpn(){
   sudo cp /etc/resolv.conf.orig /etc/resolv.conf
   echo "$(cat /etc/resolv.conf)"
   echo " "
-  sleep 2
+  sleep 5
   ps aux | grep openvpn
+  sudo ip route add default via 192.168.15.1 dev enp3s0 onlink
 }
 
 torr(){
