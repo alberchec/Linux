@@ -147,7 +147,8 @@ vpn(){
 kill-vpn(){
   sudo killall openvpn
   sudo rm -f /etc/resolv.conf
-  sudo cp /etc/resolv.conf.orig /etc/resolv.conf
+  #sudo cp /etc/resolv.conf.orig /etc/resolv.conf
+  sudo ln -s /run/resolvconf/resolv.conf /etc/resolv.conf
   echo "$(cat /etc/resolv.conf)"
   echo " "
   sleep 5
