@@ -1,0 +1,23 @@
+#! /bin/bash
+
+sudo openvpn --config /etc/openvpn/vpn2.ovpn --daemon
+sleep 2
+
+if ip address | grep -q "tun0"
+then
+  echo "Connected to SURFSHARK VPN"
+  sudo rm -f /etc/resolv.conf
+  #sudo ln -s /run/resolvconf/resolv.conf /etc/resolv.conf
+  sudo cp /etc/resolv2.conf /etc/resolv.conf
+  echo "$(cat /etc/resolv.conf | grep 'nameserver')"
+  echo $'\n'
+  echo "$(cat /run/resolvconf/resolv.conf | grep 'nameserver')"
+  sudo ufw enable
+  sudo ip route del default via 192.168.15.1 dev enp3s0 onlink
+  echo "Running DNS leak test"
+  sleep 5
+  ~/alberto/Linux/dnsleaktest.sh
+else
+  echo "Connection failed"
+  sudo killall openvpn
+fi
