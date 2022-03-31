@@ -16,7 +16,7 @@ then
   sudo ip route del default via 192.168.15.1 dev enp3s0 onlink
   echo "Running DNS leak test"
   sleep 5
-  ~/alberto/Linux/dnsleaktest.sh
+  ~/files/linux/dnsleaktest.sh
 else
   echo "Connection failed"
   sudo killall openvpn
