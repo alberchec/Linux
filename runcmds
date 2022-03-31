@@ -1,11 +1,11 @@
 #! /bin/bash
 
 torr(){
-  /home/janci/alberto/Linux/torr.sh $1 &
+  ~/alberto/Linux/torr.sh $1 &
 }
 
 #vpn-ping(){
-#  /home/janci/alberto/Linux/vpn/vpn_servers_ping/servers-ping.out
+#  ~/alberto/Linux/vpn/vpn_servers_ping/servers-ping.out
 #}
 
 gs(){

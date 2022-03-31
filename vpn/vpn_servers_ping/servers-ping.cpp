@@ -16,7 +16,7 @@ struct Server{
 };
 
 int main(){
-	ifstream input("/home/janci/alberto/Linux/vpn_servers_ping/servers-names");
+	ifstream input("home/alberto/alberto/Linux/vpn_servers_ping/servers-names");
 	string server;
 	vector<string> server_file;
 	vector<Server> servers;
@@ -50,13 +50,13 @@ int main(){
 
 	for(int i=0;i<servers.size();i++){
 		cout << "Pinging " << servers[i].location << " server...";
-		string cmd = "ping -c 1 " + servers[i].name + ".privacy.network | grep \"64 bytes\" > /home/janci/alberto/Linux/vpn_servers_ping/" + servers[i].location + ".txt";
+		string cmd = "ping -c 1 " + servers[i].name + ".privacy.network | grep \"64 bytes\" > /home/alberto/alberto/Linux/vpn_servers_ping/" + servers[i].location + ".txt";
 		system(cmd.c_str() );
 		cout << "\b\b\b" << " OK\n";
 	}
 
 	for(int i=0;i<servers.size();i++){
-		input.open("/home/janci/alberto/Linux/vpn_servers_ping/" + servers[i].location + ".txt");
+		input.open("/home/alberto/alberto/Linux/vpn_servers_ping/" + servers[i].location + ".txt");
 		getline(input,server);
 		int pos = server.find("time=");
 		server = server.substr(pos + 5);
@@ -74,5 +74,5 @@ int main(){
 	}
 	cout << "\n";
 
-	system("rm /home/janci/alberto/Linux/vpn_servers_ping/*.txt");
+	system("rm /home/alberto/alberto/Linux/vpn_servers_ping/*.txt");
 }
