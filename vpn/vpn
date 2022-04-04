@@ -13,7 +13,8 @@ then
   echo $'\n'
   echo "$(cat /run/resolvconf/resolv.conf | grep 'nameserver')"
   sudo ufw enable
-  sudo ip route del default via 192.168.15.1 dev enp3s0 onlink
+  ip route | grep default > iproutevalue
+  sudo ip route del $(cat iproutevalue)
   echo "Running DNS leak test"
   sleep 5
   dnstest

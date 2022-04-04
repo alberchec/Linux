@@ -9,4 +9,4 @@ echo "$(cat /etc/resolv.conf)"
 echo " "
 sleep 5
 ps aux | grep openvpn
-sudo ip route add default via 192.168.15.1 dev enp3s0 onlink
+sudo ip route add $(cat iproutevalue)
