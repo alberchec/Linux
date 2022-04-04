@@ -9,4 +9,4 @@ echo "$(cat /etc/resolv.conf)"
 echo " "
 sleep 5
 ps aux | grep openvpn
-sudo ip route add $(cat iproutevalue)
+sudo ip route add $iproutevalue
