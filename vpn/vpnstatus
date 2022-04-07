@@ -1,0 +1,35 @@
+#! /bin/bash
+
+#Vpn status
+if ip address | grep -q tun0
+then
+	echo "Vpn -> on"
+else
+	echo "Vpn -> off"
+fi
+
+#Firewall status
+for var in $(sudo ufw status | grep Status:)
+do
+	if [ $var == active ]
+	then
+		echo "Firewall -> on"
+	elif [ $var == inactive ]
+	then
+		echo "Firewall -> off"
+	fi
+done
+
+#Resolv.conf status
+value=$(cat /etc/resolv.conf)
+
+if echo $value | grep -q Alberto
+then
+	echo 'resolv.conf -> vpn mode'
+elif echo $value | grep -q Dynamic
+then
+	echo 'resolv.conf -> linked'
+else
+	echo 'resolv.conf -> not linked'
+fi
+
