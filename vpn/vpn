@@ -6,12 +6,8 @@ sleep 2
 if ip address | grep -q "tun0"
 then
   echo "Connected to SURFSHARK VPN"
-  sudo rm -f /etc/resolv.conf
-  #sudo ln -s /run/resolvconf/resolv.conf /etc/resolv.conf
-  sudo cp /etc/resolv2.conf /etc/resolv.conf
+  sudo ~/bin/resolvGenerator
   echo "$(cat /etc/resolv.conf | grep 'nameserver')"
-  echo $'\n'
-  echo "$(cat /run/resolvconf/resolv.conf | grep 'nameserver')"
   sudo ufw enable
   export iproutevalue=$(ip route | grep default)
   sudo ip route del $iproutevalue
