@@ -2,11 +2,11 @@
 
 sudo killall openvpn
 sudo rm -f /etc/resolv.conf
-#sudo cp /etc/resolv.conf.orig /etc/resolv.conf
 sudo ln -s /run/resolvconf/resolv.conf /etc/resolv.conf
 sleep 2
 echo "$(cat /etc/resolv.conf)"
 echo " "
 sleep 5
 ps aux | grep openvpn
-sudo ip route add $iproutevalue
+sudo ip route add $(cat ~/.temp/iproutevalue)
+rm -f ~/.temp/iproutevalue
