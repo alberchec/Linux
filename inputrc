@@ -1,0 +1,3 @@
+#map control-arrow keys to move between words
+"\e[C": forward-word
+"\e[D": backward-word
