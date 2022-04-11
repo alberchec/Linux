@@ -1,0 +1,23 @@
+To run a NFS server you need to install nfs-kernel-server:
+sudo apt install nfs-kernel-server
+
+Then create an NFS Export Directory:
+sudo mkdir -p /mnt/nfs_share
+
+Remove directory restrictions, so all the client machines can access the shared directory:
+sudo chown -R nobody:nogroup /mnt/nfs_share
+
+Permissions for accessing NFS server are defined in the /etc/exports file:
+open /etc/exports and then write the rules:
+/mnt/nfs_share 192.168.1.4(rw,sync,no_subtree_check,insecure)
+or apply to entire subnet "192.168.1.0/24"
+
+Now you have to export the NFS share directory and restart the server:
+sudo exportfs -a
+sudo systemctl restart nfs-kernel-server
+
+And finally allow NFS access through firewall if enabled
+sudo ufw allow from 192.168.1.0/24 to any port nfs
+sudo ufw enable (reload firewall)
+
+PS: NFS operates at port 2049
