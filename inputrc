@@ -1,3 +1,6 @@
 #map control-arrow keys to move between words
-"\e[C": forward-word
-"\e[D": backward-word
+#"\e[1;5C": forward-word
+#"\e[1;5D": backward-word
+"\e\e[C": forward-word
+"\e\e[D": backward-word
+
