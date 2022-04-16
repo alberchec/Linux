@@ -1,0 +1,8 @@
+To navigate with a VPN connection without the risk of data leaks, it's recommended to block ipv6 connections.
+This can be done inside the files /etc/sysctl.conf and /etc/ufw/sysctl.conf.
+
+There you can uncomment some options that will block this connections.
+
+If not present you should add the following to /etc/sysctl.conf:
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
