@@ -9,11 +9,8 @@ int main(){
 	ofstream fileout("env_variables.txt");
 	string line;
 	while(getline(file,line) ){
-		int pos1 = line.find("Shell");
-		int pos2 = line.find("Variables");
-		if(pos1 == 3 && pos2 == 9){
-			break;
-		}
+		int pos = line.find("Shell Variables");
+		if(pos == 3) break;
 	}
 	fileout << "Shell Variables" << endl;
 	while(getline(file,line) ){
