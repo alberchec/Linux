@@ -1,4 +1,4 @@
-//Bash Manual Scraper to obtain list of Enviroment Variables
+//Bash Manual Scraper to obtain list of Environment Variables
 
 #include <iostream>
 #include <fstream>
