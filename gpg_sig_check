@@ -1,0 +1,26 @@
+#Check signature of files with gpg:
+#For mac install gnupg
+#brew install gnupg
+
+#Download PGP file from site
+#Import PGP file with gpg
+gpg --import pgpfile
+
+#Copy fingerprint from site
+#Check fingerprint with gpg
+gpg --fingerprint
+
+#Check .sig .asc files with gpg
+gpg --verify file.sig
+
+#If fingerprint given from these two last cmds
+#is the same from the site, we are set
+
+#Now we need to compare the shasums that the .txt files indicate
+#Shasum the .html file and compare the result with the .txt file
+sha256sum file.html
+#For Mac
+#shasum -a 256 file.html
+
+#The link from the site also contains a SHASUM that can be compared
+#with shasum cmd
