@@ -1,14 +1,21 @@
 #! /bin/bash
 
-sudo openvpn --config /etc/openvpn/vpn2.ovpn --daemon
+if [ "$1" != "aws" ] && [ "$1" != "surfshark-saopaulo" ] && [ "$1" != "surfshark-florida" ]
+then
+	echo "Wrong vpn server!"
+	exit 0
+fi
+
+sudo openvpn --config /etc/openvpn/$1.ovpn --daemon
 sleep 2
 
 if ip address | grep -q "tun0"
 then
-  echo "Connected to SURFSHARK VPN"
+  echo "Connected to $1 VPN"
+  sleep 1
   sudo ~/bin/resolvGenerator
   echo "$(cat /etc/resolv.conf | grep 'nameserver')"
-  sudo ufw enable
+  #sudo ufw enable
   ip route | grep default > ~/.temp/iproutevalue
   sudo ip route del $(cat ~/.temp/iproutevalue)
   echo "Running DNS leak test"
