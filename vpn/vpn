@@ -1,10 +1,14 @@
 #! /bin/bash
 
-if [ "$1" != "aws" ] && [ "$1" != "surfshark-saopaulo" ] && [ "$1" != "surfshark-florida" ]
-then
-	echo "Wrong vpn server!"
-	exit 0
-fi
+case $1 in
+	"aws"|"surfshark-saopaulo"|"surfshark-florida")
+
+	;;
+	*)
+		echo "Usage (aws|surfshark-saopaulo|surfshark-florida)"
+		exit 0
+	;;
+esac
 
 sudo openvpn --config /etc/openvpn/$1.ovpn --daemon
 sleep 2
